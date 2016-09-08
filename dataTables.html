@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Data Tables Example</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+</head>
+    <style>
+        body {
+            width: 80%;
+            margin: auto;
+        }</style>
+<body>
+
+    <h1>Posts</h1>
+    
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ <script src="js/handlebars-v3.0.3.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    
+    <script id="template" type="text/x-handlebars-template">
+        <table id="postsTable" >
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Post ID</th> 
+                <th>Post Title</th> 
+                <th>Post Message</th> 
+              </tr>
+            </thead>
+            <tbody>
+            {{#each this}}
+              <tr>
+                <td>{{userId}}</td>
+                <td>{{id}}</td> 
+                <td>{{title}}</td> 
+                <td>{{body}}</td> 
+              </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </script>
+    
+    
+    <script>
+
+    (function(){
+
+        obj = {
+            getData: function() {
+                var root = 'http://jsonplaceholder.typicode.com';
+                $.ajax({
+                  url: root + '/posts',
+                  method: 'GET'
+                }).then(function(data) {
+                 //  console.log(data) ;
+                  var template = Handlebars.compile( $("#template").html() );
+                $("body").append( template(data));
+                $('#postsTable').DataTable();
+                })
+            }
+        }
+        
+
+        obj.getData();
+
+    
+    })();
+      
+</script>
+    
+    
+</body>
+</html>
