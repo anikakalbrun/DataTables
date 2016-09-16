@@ -54,7 +54,12 @@
                 $.ajax({
                   url: root + '/posts',
                   method: 'GET'
-                }).then(function(data) {
+                }).then(function(data,a,b,c,d) {
+                 console.log("a=" + a);
+                 console.log(b);
+                 console.log("c=" + c);
+                 console.log("d=" + d);
+                    
                  //  console.log(data) ;
                   var template = Handlebars.compile( $("#template").html() );
                 $("body").append( template(data));
